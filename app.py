@@ -22,6 +22,19 @@ print(f"[INFO] PII Dependency Handler initialized")
 sessions = {}
 messages = {}
 
+@app.route('/', methods=['GET'])
+def index():
+    """Root endpoint"""
+    return jsonify({
+        'service': 'PII Privacy Handler API',
+        'status': 'running',
+        'endpoints': {
+            'health': '/api/health',
+            'sessions': '/api/sessions',
+            'messages': '/api/sessions/<session_id>/messages'
+        }
+    })
+
 @app.route('/api/health', methods=['GET'])
 def health_check():
     """Health check endpoint"""
